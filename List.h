@@ -1,7 +1,5 @@
 #ifndef LIST_H
 #define LIST_H
-#ifndef LIST_H
-#define LIST_H
 
 template <typename T>
 class List {
@@ -16,9 +14,3 @@ public:
     virtual void clear() = 0;
 };
 #endif
-template <typename T> 
-class List {
-	   public:
-};
-			    
- #endif
