@@ -1,6 +1,6 @@
-#include <stdexcept>
 #ifndef LISTARRAY_H
 #define LISTARRAY_H
+#include <stdexcept>
 #include <iostream>
 #include "List.h"
 
@@ -28,7 +28,7 @@ public:
         delete[] arr;
     }
 
-    bool empty() const override {
+    bool isEmpty() const override {
         return n == 0;
     }
 
@@ -45,12 +45,14 @@ public:
         ++n;
     }
 
-    void remove(int index) override {
+    T remove(int index) override {
         if (index < 0 || index >= n) throw std::out_of_range("Índice inválido");
+        T removed = arr[index];
         for (int i = index; i < n - 1; ++i)
             arr[i] = arr[i + 1];
         --n;
         if (n < max / 4 && max / 2 >= MINSIZE) resize(max / 2);
+        return removed;
     }
 
     T& get(int index) override {
@@ -65,6 +67,20 @@ public:
     T& operator[](int index) {
         if (index < 0 || index >= n) throw std::out_of_range("Índice inválido");
         return arr[index];
+    }
+
+    void append(const T& item) override {
+        insert(n, item);
+    }
+
+    void prepend(const T& item) override {
+        insert(0, item);
+    }
+
+    int search(const T& item) const override {
+        for (int i = 0; i < n; ++i)
+            if (arr[i] == item) return i;
+        return -1;
     }
 
     friend std::ostream& operator<<(std::ostream& out, const ListArray<T>& list) {
