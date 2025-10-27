@@ -69,15 +69,15 @@ public:
         return arr[index];
     }
 
-    void append(const T& item) override {
+    void append(const T& item) {
         insert(n, item);
     }
 
-    void prepend(const T& item) override {
+    void prepend(const T& item) {
         insert(0, item);
     }
 
-    int search(const T& item) const override {
+    int search(const T& item)  {
         for (int i = 0; i < n; ++i)
             if (arr[i] == item) return i;
         return -1;
